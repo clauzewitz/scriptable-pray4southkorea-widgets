@@ -1,7 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: yellow; icon-glyph: ribbon;
-const VERSION = '1.0.0';
+const VERSION = '1.0.1';
 
 const DEBUG = false;
 const log = (args) => {
@@ -85,9 +85,9 @@ const Pray4SouthKoreaClient = {
             if (CommonUtil.compareVersion(VERSION, latestVersion)) {
                 const code = await new Request('https://raw.githubusercontent.com/clauzewitz/scriptable-pray4southkorea-widgets/main/pray4southkorea.js').loadString();
                 this.fm.writeString(this.fm.joinPath(this.fm.documentsDirectory(), `${Script.name()}.js`), code);
-                await Covid19Client.presentAlert(`Update to version ${latestVersion}\nPlease launch the app again.`);
+                await Pray4SouthKoreaClient.presentAlert(`Update to version ${latestVersion}\nPlease launch the app again.`);
             } else {
-                await Covid19Client.presentAlert(`version ${VERSION} is currently the newest version available.`);
+                await Pray4SouthKoreaClient.presentAlert(`version ${VERSION} is currently the newest version available.`);
             }
         } catch (e) {
             log(e.message);
@@ -111,7 +111,7 @@ const Pray4SouthKoreaClient = {
 };
 
 const createWidget = async (data) => {
-    const padding = 10;
+    const padding = 20;
 
     const widget = new ListWidget();
     widget.refreshAfterDate = new Date((Date.now() + (1000 * 60 * ARGUMENTS.refreshInterval)));
