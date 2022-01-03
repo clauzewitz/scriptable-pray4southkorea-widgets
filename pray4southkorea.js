@@ -1,7 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: yellow; icon-glyph: ribbon;
-const VERSION = '1.0.1';
+const VERSION = '1.0.2';
 
 const DEBUG = false;
 const log = (args) => {
@@ -18,7 +18,9 @@ const ARGUMENTS = {
     // widget. This will only tell IOS that it's
     // ready for a refresh, whether it actually 
     // refreshes is up to IOS
-    refreshInterval: 60 //mins
+    refreshInterval: 60, //mins
+    fontColor: Device.isUsingDarkAppearance() ? Color.white() : Color.darkGray(),
+    backgroundColor: Device.isUsingDarkAppearance() ? Color.darkGray() : Color.white()
 };
 Object.freeze(ARGUMENTS);
 
@@ -116,7 +118,7 @@ const createWidget = async (data) => {
     const widget = new ListWidget();
     widget.refreshAfterDate = new Date((Date.now() + (1000 * 60 * ARGUMENTS.refreshInterval)));
     widget.setPadding(padding, padding, padding, padding);
-    widget.backgroundColor = Color.white();
+    widget.backgroundColor = ARGUMENTS.backgroundColor;
     
     const titleRow = widget.addStack();
     const titleStack = titleRow.addStack();
@@ -131,7 +133,7 @@ const createWidget = async (data) => {
 
     addText(widget, '잊지 않겠습니다.', 'center', 15, true);
     addText(widget, `${ARGUMENTS.rememberDay}`, 'center', 15, true);
-    addText(widget, `+ ${calcDiffDate(ARGUMENTS.rememberDay)?.toLocaleString()}일`, 'right').textOpacity = 0.7;
+    addText(widget, `+${calcDiffDate(ARGUMENTS.rememberDay)?.toLocaleString()}일`, 'right').textOpacity = 0.7;
     
     return widget;
 };
@@ -157,7 +159,7 @@ const addText = (container, text, align = 'center', size = 12, isBold = false) =
     const txt = container.addText(text);
     txt[`${align}AlignText`]();
     txt.font = isBold ? Font.boldSystemFont(size) : Font.systemFont(size);
-    txt.textColor = Color.darkGray();
+    txt.textColor = ARGUMENTS.fontColor;
     return txt;
 };
 
