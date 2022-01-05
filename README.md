@@ -6,6 +6,6 @@
 
 [Source](pray4southkorea.js)
 
-|                     |
-| ------------------- |
-| ![](img/logo.png) |
+|                     |                     |
+| ------------------- | ------------------- |
+| ![](img/logo.png) | ![](img/logo_2.png) |
