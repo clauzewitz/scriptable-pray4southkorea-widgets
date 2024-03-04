@@ -1,7 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: yellow; icon-glyph: ribbon;
-const VERSION = '1.0.2';
+const VERSION = '1.0.3';
 
 const DEBUG = false;
 const log = (args) => {
@@ -113,27 +113,38 @@ const Pray4SouthKoreaClient = {
 };
 
 const createWidget = async (data) => {
-    const padding = 20;
-
     const widget = new ListWidget();
     widget.refreshAfterDate = new Date((Date.now() + (1000 * 60 * ARGUMENTS.refreshInterval)));
-    widget.setPadding(padding, padding, padding, padding);
     widget.backgroundColor = ARGUMENTS.backgroundColor;
-    
+        
     const titleRow = widget.addStack();
     const titleStack = titleRow.addStack();
     titleStack.layoutHorizontally();
     titleStack.centerAlignContent();
     titleStack.addSpacer();
 
-    addImage(titleStack, this.fm.readImage(this.resourcePath), 80);
-    titleStack.addSpacer();
-    
-    widget.addSpacer();
+    if (config.runsInAccessoryWidget) {
+        widget.useDefaultPadding();
 
-    addText(widget, '잊지 않겠습니다.', 'center', 15, true);
-    addText(widget, `${ARGUMENTS.rememberDay}`, 'center', 15, true);
-    addText(widget, `+${calcDiffDate(ARGUMENTS.rememberDay)?.toLocaleString()}일`, 'right').textOpacity = 0.7;
+        addImage(titleStack, this.fm.readImage(this.resourcePath), 40);
+        titleStack.addSpacer();
+
+        widget.addSpacer();
+        addText(widget, `+${calcDiffDate(ARGUMENTS.rememberDay)?.toLocaleString()}`, 'center', 10, true);
+    } else {
+        const padding = 20;
+
+        widget.setPadding(padding, padding, padding, padding);
+    
+        addImage(titleStack, this.fm.readImage(this.resourcePath), 80);
+        titleStack.addSpacer();
+        
+        widget.addSpacer();
+    
+        addText(widget, '잊지 않겠습니다.', 'center', 15, true);
+        addText(widget, `${ARGUMENTS.rememberDay}`, 'center', 15, true);
+        addText(widget, `+${calcDiffDate(ARGUMENTS.rememberDay)?.toLocaleString()}일`, 'right').textOpacity = 0.7;
+    }
     
     return widget;
 };
