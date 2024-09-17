@@ -126,7 +126,7 @@ const createWidget = async (data) => {
     if (config.runsInAccessoryWidget) {
         widget.useDefaultPadding();
 
-        addImage(titleStack, this.fm.readImage(this.resourcePath), 40);
+        addImage(titleStack, Pray4SouthKoreaClient.fm.readImage(Pray4SouthKoreaClient.resourcePath), 40);
         titleStack.addSpacer();
 
         widget.addSpacer();
@@ -136,7 +136,7 @@ const createWidget = async (data) => {
 
         widget.setPadding(padding, padding, padding, padding);
     
-        addImage(titleStack, this.fm.readImage(this.resourcePath), 80);
+        addImage(titleStack, Pray4SouthKoreaClient.fm.readImage(Pray4SouthKoreaClient.resourcePath), 80);
         titleStack.addSpacer();
         
         widget.addSpacer();
